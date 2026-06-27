@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "d51c0831-606d-4e13-aa06-35f5fea8240d",
+      "name": "Rules",
+      "description": {
+        "content": "Spotlight governance rules feed",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c9a8d36-f1fe-4928-90aa-586e2020c0c9",
+          "name": "Get spotlight rules feed",
+          "request": {
+            "name": "Get spotlight rules feed",
+            "description": {
+              "content": "Returns the full Spotlight Rules ruleset as a JSON array. The endpoint is\npublic, requires no authentication, and serves responses with permissive\nCORS headers so it can be consumed directly from the browser.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rules.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74cf7739-b7c9-45c7-9dfa-07b92d605b6b",
+              "name": "A JSON array of spotlight rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rules.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"slug\": \"string\",\n    \"description\": \"string\",\n    \"severity\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"slug\": \"string\",\n    \"description\": \"string\",\n    \"severity\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://spotlight-rules.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "df651e88-e421-4c10-be1c-25139370ff69",
+    "name": "Spotlight Rules Feed API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public JSON feed for the API Evangelist Spotlight Rules — a curated catalog of\nAPI governance rules and guardrails. The feed is delivered as a single JSON\ndocument over HTTPS with CORS enabled and no authentication required.\n\n\nContact Support:\n Name: Kin Lane\n Email: info@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

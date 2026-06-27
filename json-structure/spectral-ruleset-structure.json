@@ -1,0 +1,74 @@
+{
+  "title": "Spectral Ruleset Structure",
+  "description": "Hierarchical structure of a complete Spectral ruleset file (.spectral.yml or .spectral.json)",
+  "type": "object",
+  "fields": [
+    {
+      "name": "extends",
+      "type": "array|string",
+      "description": "Inherit from built-in or external rulesets",
+      "examples": ["spectral:oas", "spectral:asyncapi", ["spectral:oas", "off"]]
+    },
+    {
+      "name": "formats",
+      "type": "array",
+      "description": "Specify which formats this ruleset applies to by default",
+      "items": "string",
+      "examples": [["oas2", "oas3", "asyncapi2"]]
+    },
+    {
+      "name": "functions",
+      "type": "array",
+      "description": "Paths to custom JavaScript function files",
+      "items": "string"
+    },
+    {
+      "name": "functionsDir",
+      "type": "string",
+      "description": "Directory containing custom function files"
+    },
+    {
+      "name": "aliases",
+      "type": "object",
+      "description": "Reusable JSONPath aliases that can be referenced in rule 'given' fields",
+      "fields": [
+        {"name": "{alias-name}", "type": "array", "description": "Array of JSONPath expressions"}
+      ]
+    },
+    {
+      "name": "overrides",
+      "type": "array",
+      "description": "Apply different rule severity to specific files or patterns",
+      "items": {
+        "type": "object",
+        "fields": [
+          {"name": "files", "type": "array", "description": "Glob patterns for file matching"},
+          {"name": "rules", "type": "object", "description": "Rule overrides for matched files"}
+        ]
+      }
+    },
+    {
+      "name": "rules",
+      "type": "object",
+      "description": "Map of rule names to rule definitions",
+      "fields": [
+        {
+          "name": "{rule-name}",
+          "type": "object",
+          "description": "A single rule definition",
+          "fields": [
+            {"name": "description", "type": "string"},
+            {"name": "message", "type": "string"},
+            {"name": "severity", "type": "string|integer", "enum": ["error", "warn", "info", "hint", "off", -1, 0, 1, 2, 3]},
+            {"name": "resolved", "type": "boolean"},
+            {"name": "formats", "type": "array"},
+            {"name": "given", "type": "string|array", "description": "JSONPath selector(s)"},
+            {"name": "then", "type": "object|array", "description": "Assertion(s) to run"},
+            {"name": "recommended", "type": "boolean"},
+            {"name": "tags", "type": "array"}
+          ]
+        }
+      ]
+    }
+  ]
+}

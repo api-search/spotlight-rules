@@ -1,0 +1,223 @@
+vocabulary:
+  name: Spotlight Rules Vocabulary
+  description: >-
+    Domain vocabulary for API linting and governance using Spectral and Vacuum rules,
+    covering rule structure, validation functions, JSONPath selectors, severity levels,
+    and the broader API governance ecosystem.
+  version: "1.0.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  provider: API Evangelist (Kin Lane)
+  domain: API Governance
+
+terms:
+  - term: Spectral
+    definition: >-
+      An open-source JSON/YAML linting framework developed by Stoplight for validating
+      API specifications including OpenAPI (v2, v3.0, v3.1), AsyncAPI (v2.x), and Arazzo.
+      Rules are defined in YAML or JSON configuration files using JSONPath selectors and
+      built-in or custom assertion functions.
+    tags: [Linting, Open Source, Stoplight]
+    url: https://github.com/stoplightio/spectral
+
+  - term: Vacuum
+    definition: >-
+      An ultra-fast, open-source OpenAPI linting tool written in Go by pb33f (Dave Shanley).
+      100% compatible with Spectral rulesets while adding howToFix, id, and category fields.
+      Designed for high-performance linting of large API specifications with a built-in dashboard UI.
+    tags: [Linting, Open Source, Go, High Performance]
+    url: https://github.com/daveshanley/vacuum
+
+  - term: Ruleset
+    definition: >-
+      A YAML or JSON configuration file containing one or more linting rules and their settings.
+      Rulesets can extend other rulesets (including the built-in spectral:oas preset) and
+      be shared via npm packages or direct URLs.
+    tags: [Configuration, Governance]
+    aliases: [governance rules, style guide rules, lint configuration]
+
+  - term: Rule
+    definition: >-
+      A single governance check consisting of a JSONPath selector (given), an assertion function
+      (then), a severity level, and a description. Rules fire when the given selector matches
+      nodes in the document and the then assertion fails.
+    tags: [Governance, Validation]
+
+  - term: Severity
+    definition: >-
+      The importance level of a rule violation: error (blocking), warn (advisory),
+      info (informational), hint (suggestion), or off (disabled). Only errors typically
+      fail CI pipelines.
+    tags: [Configuration, Policy]
+    values: [error, warn, info, hint, off]
+
+  - term: JSONPath
+    definition: >-
+      A query language for navigating JSON documents, used in Spectral and Vacuum rule
+      'given' fields to select the nodes that rules should validate. Spectral uses
+      JSON Path Plus; Vacuum supports both RFC 9535 and JSON Path Plus.
+    tags: [Query Language, Technology]
+    url: https://goessner.net/articles/JsonPath/
+
+  - term: Given
+    definition: >-
+      The JSONPath expression in a rule that selects which nodes in the document to validate.
+      Multiple paths can be provided as an array to match nodes across different locations.
+    tags: [Rule Structure, JSONPath]
+    aliases: [path selector, target selector]
+
+  - term: Then
+    definition: >-
+      The assertion section of a rule that defines what function to run against selected nodes
+      and optionally which field within each node to check. Can be a single assertion or an
+      array of assertions that must all pass.
+    tags: [Rule Structure, Assertion]
+
+  - term: Function
+    definition: >-
+      A built-in or custom validation function used in a rule's 'then' section to check
+      the selected nodes. Built-in functions include truthy, falsy, pattern, enumeration,
+      length, schema, alphabetical, casing, xor, and unreferencedReusableObject.
+    tags: [Validation, Functions]
+    aliases: [assertion function, validation function]
+
+  - term: truthy
+    definition: >-
+      A built-in Spectral function that passes when a value is truthy (non-empty string,
+      non-zero number, non-null, non-false). Used to require that a field exists and has a value.
+    tags: [Function, Validation]
+
+  - term: pattern
+    definition: >-
+      A built-in Spectral function that validates values against a regular expression using
+      'match' (must match) or 'notMatch' (must not match) options.
+    tags: [Function, Validation]
+
+  - term: enumeration
+    definition: >-
+      A built-in Spectral function that validates that a value is one of a predefined set
+      of allowed values specified in the 'values' functionOptions array.
+    tags: [Function, Validation]
+
+  - term: casing
+    definition: >-
+      A built-in Spectral function that validates naming conventions: camel, pascal, snake,
+      macro, kebab, cobol, or flat casing styles.
+    tags: [Function, Validation, Naming]
+
+  - term: howToFix
+    definition: >-
+      A Vacuum-specific field on rules that provides actionable remediation guidance explaining
+      exactly how to fix a rule violation. Not part of the Spectral specification but supported
+      by Vacuum and forward-compatible tooling.
+    tags: [Vacuum, Remediation, Documentation]
+
+  - term: id
+    definition: >-
+      A Vacuum-specific stable, machine-readable identifier for a rule in kebab-case format.
+      Enables stable references to rules across ruleset versions, unlike rule name keys
+      which may change. Not part of the Spectral specification.
+    tags: [Vacuum, Identity, Stability]
+
+  - term: category
+    definition: >-
+      A Vacuum-specific organizational grouping for rules used in dashboard displays and reports.
+      Can be a string identifier or an object with id, name, and description fields.
+    tags: [Vacuum, Organization, Dashboard]
+
+  - term: extends
+    definition: >-
+      A ruleset-level field that inherits rules from another ruleset. Can reference built-in
+      presets (spectral:oas, spectral:asyncapi) or external rulesets via npm package names
+      or URLs. Inherited rules can be individually overridden or disabled.
+    tags: [Inheritance, Configuration]
+
+  - term: aliases
+    definition: >-
+      Reusable JSONPath expressions defined at the ruleset level that can be referenced in
+      individual rule 'given' fields. Aliases reduce duplication when multiple rules target
+      the same document nodes.
+    tags: [Configuration, Reusability]
+
+  - term: overrides
+    definition: >-
+      A ruleset-level field that changes rule severity for specific files or glob patterns.
+      Enables different governance standards for legacy APIs versus new APIs, or different
+      severity for generated versus hand-authored specifications.
+    tags: [Configuration, Policy]
+
+  - term: OWASP Top 10
+    definition: >-
+      A community-maintained ruleset from Stoplight that validates OpenAPI specifications
+      against the OWASP API Security Top 10 vulnerabilities, including broken authentication,
+      excessive data exposure, and improper asset management.
+    tags: [Security, Governance, OWASP]
+    url: https://github.com/stoplightio/spectral-owasp-ruleset
+
+  - term: Custom Function
+    definition: >-
+      A user-defined validation function written in JavaScript (for Spectral) or Go (for Vacuum)
+      that implements complex rule logic beyond what built-in functions support. Custom functions
+      receive the value, options, and context as arguments and return an array of error messages.
+    tags: [Extensions, JavaScript, Go]
+
+  - term: Arazzo
+    definition: >-
+      The OpenAPI Arazzo Specification (2025) for defining API workflows and sequences of
+      operations. Spectral and Vacuum both support linting Arazzo specifications alongside
+      OpenAPI and AsyncAPI documents.
+    tags: [Specification, Workflows]
+    url: https://spec.openapis.org/arazzo/v1.0.0
+
+  - term: AsyncAPI
+    definition: >-
+      The specification for describing event-driven and message-based APIs. Spectral includes
+      a built-in asyncapi preset (spectral:asyncapi) for validating AsyncAPI v2.x documents.
+    tags: [Specification, Event-Driven]
+    url: https://www.asyncapi.com/
+
+classifications:
+  severity_levels:
+    - error
+    - warn
+    - info
+    - hint
+    - off
+  built_in_functions:
+    - truthy
+    - falsy
+    - defined
+    - undefined
+    - pattern
+    - enumeration
+    - length
+    - schema
+    - alphabetical
+    - casing
+    - xor
+    - unreferencedReusableObject
+    - typedEnum
+  supported_formats:
+    - oas2
+    - oas3
+    - oas3.0
+    - oas3.1
+    - asyncapi2
+    - arazzo1
+  casing_types:
+    - camel
+    - pascal
+    - snake
+    - macro
+    - kebab
+    - cobol
+    - flat
+  built_in_rulesets:
+    - spectral:oas
+    - spectral:asyncapi
+    - spectral:arazzo
+  community_rulesets:
+    - Adidas API Guidelines
+    - Azure API Style Guide
+    - Digital Ocean API Guidelines
+    - OWASP Top 10 for APIs

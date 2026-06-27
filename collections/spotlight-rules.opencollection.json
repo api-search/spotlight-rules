@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Spotlight Rules Feed API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get spotlight rules feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://spotlight-rules.com/rules.json"
+          },
+          "docs": "Returns the full Spotlight Rules ruleset as a JSON array. The endpoint is\npublic, requires no authentication, and serves responses with permissive\nCORS headers so it can be consumed directly from the browser.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

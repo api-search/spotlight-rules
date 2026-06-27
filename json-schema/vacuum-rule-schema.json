@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spotlight-rules.com/vacuum-rule-schema.json",
+  "title": "Vacuum Rule",
+  "description": "Schema for a Vacuum linting rule definition. Vacuum rules extend Spectral rules with additional fields for remediation guidance, stable identifiers, and category organization.",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A human-readable explanation of what this rule checks and why it matters"
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message shown when the rule fails"
+        },
+        "severity": {
+          "description": "How severe a rule violation is",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["error", "warn", "info", "hint", "off"]
+            },
+            {
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 3
+            }
+          ]
+        },
+        "given": {
+          "description": "JSONPath expression(s) targeting nodes to validate",
+          "oneOf": [
+            {"type": "string"},
+            {"type": "array", "items": {"type": "string"}}
+          ]
+        },
+        "then": {
+          "description": "The assertion(s) to apply to matched nodes",
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "field": {"type": "string"},
+                "function": {"type": "string"},
+                "functionOptions": {"type": "object"}
+              },
+              "required": ["function"]
+            },
+            {
+              "type": "array",
+              "items": {"type": "object"}
+            }
+          ]
+        },
+        "formats": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "recommended": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "required": ["given", "then"]
+    }
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A stable, machine-readable identifier for this rule. Should be kebab-case and unique within the ruleset.",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "examples": ["operation-must-have-summary", "info-must-have-contact"]
+    },
+    "howToFix": {
+      "type": "string",
+      "description": "Actionable remediation guidance shown to developers when a rule violation is found. Should explain exactly how to fix the issue.",
+      "examples": [
+        "Add a 'summary' field to this operation with a concise, Title Case description.",
+        "Add a 'contact' object to the info section with a name, email, or URL."
+      ]
+    },
+    "category": {
+      "description": "Organizational category for grouping rules in dashboards and reports",
+      "oneOf": [
+        {
+          "type": "string",
+          "examples": ["info", "operations", "tags", "schemas", "security", "responses", "parameters"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string"},
+            "name": {"type": "string"},
+            "description": {"type": "string"}
+          }
+        }
+      ]
+    }
+  },
+  "description": "Vacuum rules are a superset of Spectral rules, adding id, howToFix, and category fields while maintaining full backward compatibility with Spectral rule files."
+}

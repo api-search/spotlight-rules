@@ -1,0 +1,51 @@
+aid: api-evangelist-spotlight-rules
+specificationVersion: '0.19'
+type: Index
+name: Spotlight Rules
+description: Standalone spotlight on API governance rules — guardrails for API operations delivered as a curated ruleset alongside
+  the rules collection.
+image: https://kinlane-images.s3.amazonaws.com/shared/api-evangelist-logos/api-evangelist-logo-butterfly.png
+tags:
+- Rules
+- Spotlight
+- Governance
+created: '2024-11-11'
+modified: '2026-05-20'
+url: https://github.com/api-evangelist/spotlight-rules/blob/main/apis.yml
+apis:
+- aid: api-evangelist-spotlight-rules:spotlight-rules
+  name: Spotlight Rules Feed
+  description: Standalone spotlight on API governance rules — guardrails for API operations delivered as a curated ruleset
+    alongside the rules collection.
+  image: https://kinlane-images.s3.amazonaws.com/shared/api-evangelist-logos/api-evangelist-logo-butterfly.png
+  humanURL: https://developer.apievangelist.com/feeds/spotlight-rules/
+  baseURL: https://spotlight-rules.com
+  tags:
+  - Rules
+  - Spotlight
+  - Governance
+  properties:
+  - type: AgentSkills
+    url: https://raw.githubusercontent.com/api-commons/agent-skills/main/spotlight-governance/SKILL.md
+  - type: Documentation
+    url: https://developer.apievangelist.com/feeds/spotlight-rules/
+  - type: JSONFeed
+    url: https://spotlight-rules.com/rules.json
+  - type: GitHubRepository
+    url: https://github.com/api-evangelist/spotlight-rules
+  contact:
+  - FN: Kin Lane
+    email: info@apievangelist.com
+common:
+- type: DeveloperPortal
+  url: https://developer.apievangelist.com/
+- type: Network
+  url: https://developer.apievangelist.com/network/
+- type: GitHubOrganization
+  url: https://github.com/api-evangelist
+- type: APIsJSON
+  url: https://developer.apievangelist.com/apis.json
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  X-github: kinlane

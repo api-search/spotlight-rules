@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spotlight-rules.com/spectral-rule-schema.json",
+  "title": "Spectral Rule",
+  "description": "Schema for a single Spectral linting rule definition. Rules are the core unit of Spectral rulesets and define how to validate API specifications.",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "A human-readable explanation of what this rule checks and why it matters"
+    },
+    "message": {
+      "type": "string",
+      "description": "The error message shown when the rule fails. Can use {{error}} and {{description}} template variables."
+    },
+    "severity": {
+      "description": "How severe a rule violation is",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["error", "warn", "info", "hint", "off"]
+        },
+        {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 3
+        }
+      ]
+    },
+    "resolved": {
+      "type": "boolean",
+      "description": "If false, run the rule against unresolved ($ref-intact) documents"
+    },
+    "formats": {
+      "type": "array",
+      "description": "Limit this rule to specific specification formats",
+      "items": {
+        "type": "string",
+        "examples": ["oas2", "oas3", "oas3.0", "oas3.1", "asyncapi2"]
+      }
+    },
+    "given": {
+      "description": "JSONPath expression(s) targeting nodes to validate. Can be a string or array of strings.",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "JSONPath expression",
+          "examples": ["$.paths[*][get,post,put,patch,delete]", "$.info"]
+        },
+        {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      ]
+    },
+    "then": {
+      "description": "The assertion(s) to apply to nodes matched by 'given'",
+      "oneOf": [
+        {"$ref": "#/$defs/RuleThen"},
+        {
+          "type": "array",
+          "items": {"$ref": "#/$defs/RuleThen"}
+        }
+      ]
+    },
+    "recommended": {
+      "type": "boolean",
+      "description": "Whether this rule is included in the 'recommended' preset"
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Organizational tags for grouping related rules"
+    },
+    "extends": {
+      "description": "Extend or reference another rule",
+      "oneOf": [
+        {"type": "string"},
+        {"type": "array", "items": {"type": "string"}}
+      ]
+    }
+  },
+  "required": ["given", "then"],
+  "$defs": {
+    "RuleThen": {
+      "type": "object",
+      "description": "A single assertion to run against matched nodes",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "A specific field to check within each matched node"
+        },
+        "function": {
+          "type": "string",
+          "description": "The built-in or custom function to call for validation",
+          "examples": [
+            "truthy", "falsy", "defined", "undefined",
+            "pattern", "enumeration", "length", "schema",
+            "alphabetical", "casing", "xor", "unreferencedReusableObject"
+          ]
+        },
+        "functionOptions": {
+          "type": "object",
+          "description": "Options passed to the validation function",
+          "properties": {
+            "match": {"type": "string", "description": "Regex pattern for pattern function"},
+            "notMatch": {"type": "string", "description": "Negative regex for pattern function"},
+            "values": {"type": "array", "description": "Valid values for enumeration function"},
+            "min": {"type": "integer", "description": "Minimum length for length function"},
+            "max": {"type": "integer", "description": "Maximum length for length function"},
+            "type": {"type": "string", "description": "Casing type for casing function"}
+          }
+        }
+      },
+      "required": ["function"]
+    }
+  }
+}

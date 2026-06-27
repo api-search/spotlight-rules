@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Spotlight Rules Feed API
+  description: |
+    Public JSON feed for the API Evangelist Spotlight Rules — a curated catalog of
+    API governance rules and guardrails. The feed is delivered as a single JSON
+    document over HTTPS with CORS enabled and no authentication required.
+  version: "1.0.0"
+  contact:
+    name: Kin Lane
+    email: info@apievangelist.com
+  license:
+    name: API Evangelist
+    url: https://apievangelist.com
+servers:
+  - url: https://spotlight-rules.com
+    description: Spotlight Rules feed host
+tags:
+  - name: Rules
+    description: Spotlight governance rules feed
+paths:
+  /rules.json:
+    get:
+      tags:
+        - Rules
+      summary: Get spotlight rules feed
+      description: |
+        Returns the full Spotlight Rules ruleset as a JSON array. The endpoint is
+        public, requires no authentication, and serves responses with permissive
+        CORS headers so it can be consumed directly from the browser.
+      operationId: getRules
+      responses:
+        "200":
+          description: A JSON array of spotlight rules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rule"
+components:
+  schemas:
+    Rule:
+      type: object
+      description: A single spotlight governance rule entry.
+      properties:
+        name:
+          type: string
+          description: Human-readable name of the rule.
+        slug:
+          type: string
+          description: URL-safe slug identifier for the rule.
+        description:
+          type: string
+          description: Description of what the rule checks or recommends.
+        severity:
+          type: string
+          description: Severity level associated with the rule (e.g. info, warn, error).
+        tags:
+          type: array
+          description: Free-form tags categorizing the rule.
+          items:
+            type: string

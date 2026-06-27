@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "spotlight": "https://spotlight-rules.com/vocab#",
+    "spectral": "https://stoplight.io/spectral/vocab#",
+    "vacuum": "https://quobix.com/vacuum/vocab#",
+    "SpectralRule": "spotlight:SpectralRule",
+    "VacuumRule": "spotlight:VacuumRule",
+    "Ruleset": "spotlight:Ruleset",
+    "LintingFunction": "spotlight:LintingFunction",
+    "description": "description",
+    "message": "spotlight:ruleMessage",
+    "severity": "spotlight:severity",
+    "given": "spotlight:jsonPathSelector",
+    "then": "spotlight:assertion",
+    "formats": "spotlight:applicableFormats",
+    "id": "identifier",
+    "howToFix": "spotlight:remediationGuidance",
+    "category": "category",
+    "recommended": "spotlight:isRecommended",
+    "tags": "keywords",
+    "extends": "spotlight:extendsRuleset",
+    "aliases": "spotlight:jsonPathAliases",
+    "overrides": "spotlight:fileOverrides",
+    "rules": "spotlight:containsRules",
+    "function": "spotlight:validationFunction",
+    "field": "spotlight:targetField",
+    "functionOptions": "spotlight:functionOptions",
+    "match": "spotlight:matchPattern",
+    "notMatch": "spotlight:negativeMatchPattern",
+    "Spectral": {
+      "@id": "spotlight:Spectral",
+      "@type": "@id"
+    },
+    "Vacuum": {
+      "@id": "spotlight:Vacuum",
+      "@type": "@id"
+    },
+    "OpenAPI": {
+      "@id": "https://spec.openapis.org/oas/v3.1.0",
+      "@type": "@id"
+    },
+    "AsyncAPI": {
+      "@id": "https://www.asyncapi.com/docs/reference",
+      "@type": "@id"
+    },
+    "Arazzo": {
+      "@id": "https://spec.openapis.org/arazzo/v1.0.0",
+      "@type": "@id"
+    }
+  }
+}
