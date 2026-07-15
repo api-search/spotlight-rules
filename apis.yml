@@ -37,6 +37,8 @@ apis:
   - FN: Kin Lane
     email: info@apievangelist.com
 common:
+- type: AgenticAccess
+  url: agentic-access/spotlight-rules-agentic-access.yml
 - type: DomainSecurity
   url: security/spotlight-rules-domain-security.yml
 - type: DeveloperPortal
