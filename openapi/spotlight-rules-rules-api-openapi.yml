@@ -1,11 +1,14 @@
 openapi: 3.1.0
 info:
-  title: Spotlight Rules Feed API
-  description: |
-    Public JSON feed for the API Evangelist Spotlight Rules — a curated catalog of
+  title: Spotlight Feed Rules API
+  description: 'Public JSON feed for the API Evangelist Spotlight Rules — a curated catalog of
+
     API governance rules and guardrails. The feed is delivered as a single JSON
+
     document over HTTPS with CORS enabled and no authentication required.
-  version: "1.0.0"
+
+    '
+  version: 1.0.0
   contact:
     name: Kin Lane
     email: info@apievangelist.com
@@ -13,31 +16,34 @@ info:
     name: API Evangelist
     url: https://apievangelist.com
 servers:
-  - url: https://spotlight-rules.com
-    description: Spotlight Rules feed host
+- url: https://spotlight-rules.com
+  description: Spotlight Rules feed host
 tags:
-  - name: Rules
-    description: Spotlight governance rules feed
+- name: Rules
+  description: Spotlight governance rules feed
 paths:
   /rules.json:
     get:
       tags:
-        - Rules
+      - Rules
       summary: Get spotlight rules feed
-      description: |
-        Returns the full Spotlight Rules ruleset as a JSON array. The endpoint is
+      description: 'Returns the full Spotlight Rules ruleset as a JSON array. The endpoint is
+
         public, requires no authentication, and serves responses with permissive
+
         CORS headers so it can be consumed directly from the browser.
+
+        '
       operationId: getRules
       responses:
-        "200":
+        '200':
           description: A JSON array of spotlight rules
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Rule"
+                  $ref: '#/components/schemas/Rule'
 components:
   schemas:
     Rule:
