@@ -1,4 +1,16 @@
 aid: api-evangelist-spotlight-rules
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.19'
 type: Index
 name: Spotlight Rules
@@ -15,9 +27,11 @@ url: https://github.com/api-evangelist/spotlight-rules/blob/main/apis.yml
 apis:
 - aid: api-evangelist-spotlight-rules:spotlight-rules
   name: Spotlight Rules Feed
-  description: Standalone spotlight on API governance rules — guardrails for API operations delivered as a curated ruleset
-    alongside the rules collection.
-  image: https://kinlane-images.s3.amazonaws.com/shared/api-evangelist-logos/api-evangelist-logo-butterfly.png
+  description: >-
+    Standalone spotlight on API governance rules — guardrails for API operations delivered as a curated
+    ruleset alongside the rules collection.
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/api-evangelist-logos/api-evangelist-logo-butterfly.png
   humanURL: https://developer.apievangelist.com/feeds/spotlight-rules/
   baseURL: https://spotlight-rules.com
   tags:
@@ -26,7 +40,8 @@ apis:
   - Governance
   properties:
   - type: AgentSkills
-    url: https://raw.githubusercontent.com/api-commons/agent-skills/main/spotlight-governance/SKILL.md
+    url: >-
+      https://raw.githubusercontent.com/api-commons/agent-skills/main/spotlight-governance/SKILL.md
   - type: Documentation
     url: https://developer.apievangelist.com/feeds/spotlight-rules/
   - type: JSONFeed
@@ -36,6 +51,16 @@ apis:
   contact:
   - FN: Kin Lane
     email: info@apievangelist.com
+- aid: spotlight-rules:spotlight-rules-rules-api
+  name: Spotlight Rules Rules API
+  description: Spotlight governance rules feed
+  humanURL: https://developer.apievangelist.com/feeds/spotlight-rules/
+  baseURL: https://spotlight-rules.com
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/spotlight-rules-rules-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/spotlight-rules-agentic-access.yml
