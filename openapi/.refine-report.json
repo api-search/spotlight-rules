@@ -1,0 +1,14 @@
+{
+  "provider": "spotlight-rules",
+  "sources": [
+    "spotlight-rules-rules-api-openapi.yml"
+  ],
+  "outputs": [
+    "spotlight-rules-rules-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
